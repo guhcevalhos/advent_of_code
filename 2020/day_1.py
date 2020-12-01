@@ -41,7 +41,7 @@ def day1_part2(input: List[int]) -> int:
                 if item1 + item2 + item3 == 2020: return item1 * item2 * item3
     '''
     # Approach 2: Three-sum
-    # Time: O(N lg N)
+    # Time: O(N**2)
     # Space: O(1)
     '''
         - When we have three numbers, the approach is a bit different, instead of a dictionary, we will sort our input and use two-pointer to find the target number.
