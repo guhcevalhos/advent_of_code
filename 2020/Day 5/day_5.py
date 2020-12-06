@@ -118,7 +118,7 @@ def day5_part2(input: List[List]) -> int:
     '''
     We use the aux function get_set_id() to get all Ids from the input.
     After that, we sort them and do a linear search to figure out which id is missing.
-    # Time: O(N**2 Lg N)
+    # Time: O(N Lg N)
     # Space: O(N)
     '''
 
@@ -128,7 +128,6 @@ def day5_part2(input: List[List]) -> int:
         seats.append(get_seat_id(boarding_pass))
 
     seats.sort()
-    print(seats)
 
     for index, id in enumerate(seats):
         if id + 1 != seats[index + 1]: return id + 1
@@ -154,6 +153,6 @@ def run_results_with_tests():
     print('=-=-==-==-=-=-=-=-=-=-=')
     
     # Part 2, as no test data as provided
-    print(day5_part2(parse_input("input")))
+    print(f'Result Part 1 => {day5_part2(parse_input("input"))}')
 
 run_results_with_tests()
