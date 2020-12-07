@@ -82,12 +82,14 @@ def day6_part2(input: List[List]) -> int:
     
     queue = collections.deque()
     multipliers = {'shiny gold': 1}
+    memo = {}
     visited = set()
 
     queue.append('shiny gold')
 
     while queue:
         current_bag = queue.popleft()
+        total_this_bag = 0
         if debug: print(f'Current Bag: {current_bag}')
 
         visited.add(current_bag)
@@ -96,12 +98,18 @@ def day6_part2(input: List[List]) -> int:
 
         for neighbor in input[current_bag].keys():
             if debug: print(f'{neighbor=}')
-            if neighbor and neighbor not in visited:
+            if neighbor in memo: total += memo[neighbor]
+            if not neighbor in visited:
                 if debug: print(f'Adding {neighbor} to queue')
                 queue.append(neighbor)
                 if debug: print(f'Adding {multipliers[current_bag]} * {input[current_bag][neighbor]}')
-                total += multipliers[current_bag] * input[current_bag][neighbor]
+                total_this_bag += multipliers[current_bag] * input[current_bag][neighbor]
                 multipliers[neighbor] = multipliers[current_bag] * input[current_bag][neighbor]
+
+        if current_bag not in memo:
+            if debug: print(f'In bag {current_bag}: {total_this_bag}') 
+            memo[current_bag] = total_this_bag
+            total += memo[current_bag]
 
         if debug: print('-------')
 
